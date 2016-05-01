@@ -30,20 +30,18 @@ class Feed extends Component {
   }
   fetchFeed(){
     AuthService.getAuthInfo((err, authInfo)=>{
-      console.log(authInfo)
       var url = 'https://api.github.com/users/'+authInfo.user.login+'/received_events';
       fetch(url,{
         headers: authInfo.header
       })
-      .then((r)=> r.json())
+      .then((r)=>{
+        return r.json()
+      })
       .then((data)=>{
-        var feedItems = data.filter((ev)=>{
-          ev.type=='PushEvent'
-        });
+        var feedItems = data.filter((ev)=>ev.type=='PushEvent');
         this.setState({dataSource: this.state.dataSource.cloneWithRows(feedItems)});
       })
-    }
-      )
+    })
   }
   render(){
     return(

@@ -95,7 +95,7 @@ class Login extends Component{
         }
         return (
             <View style={styles.container}>
-                <Image style={styles.logo} source={require('image!images')} />
+                <Image style={styles.logo} source={require('image!git')} />
                 <Text style={styles.heading}>GitHub Browser</Text>
                 <TextInput 
                     style={styles.input} 

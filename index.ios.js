@@ -6,6 +6,7 @@
 
 var React = require('react-native');
 var AuthService = require('./AuthService');
+var AppContainer = require('./AppContainer');
 var {
   AppRegistry,
   Component,
@@ -29,7 +30,7 @@ class GithubBrwoser extends Component {
     AuthService.getAuthInfo((err,authInfo)=>{
       this.setState({
         checkingAuth: false,
-        isLoggedIn: true,
+        isLoggedIn: authInfo!=null,
       })
     });
   }
@@ -42,16 +43,14 @@ class GithubBrwoser extends Component {
     if(this.state.checkingAuth){
       return (
         <View style={styles.container}>
-          <ActivityIndicatorIOS style={styles.loader} size='large' animating='true' />
+          <ActivityIndicatorIOS style={styles.loader} size='large' animating={true} />
         </View>
         )
     }
 
     if(this.state.isLoggedIn){
       return (
-        <View style={styles.container}>
-          <Text style={styles.welcome}> Im logged in bro </Text>
-        </View>
+        <AppContainer />
       )
     }
     else{
